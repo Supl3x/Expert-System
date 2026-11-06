@@ -8,6 +8,8 @@ A rule-based expert system that helps students and job seekers evaluate job offe
 
 **OfferWise**: A Python-based expert system using forward chaining inference to evaluate job offers and internships, providing verdicts, risk analysis, and actionable recommendations to help users make informed career decisions.
 
+**Live Application**: [https://offerwise-2134.streamlit.app/](https://offerwise-2134.streamlit.app/)
+
 ---
 
 ## 2. Problem Identification
@@ -369,6 +371,8 @@ python -m pytest tests/test_engine.py -q
 
 ### Deployment to Streamlit Community Cloud
 
+**Live Demo URL**: [https://offerwise-2134.streamlit.app/](https://offerwise-2134.streamlit.app/)
+
 1. **Prepare Repository**:
    - Push all files to GitHub repository
    - Ensure `requirements.txt` is in root directory
@@ -378,7 +382,7 @@ python -m pytest tests/test_engine.py -q
    - Go to [share.streamlit.io](https://share.streamlit.io)
    - Sign in with GitHub
    - Click "New app"
-   - Select your repository
+   - Select repository: `Supl3x/Expert-System`
    - Set main file path: `src/app.py`
    - Click "Deploy"
 
@@ -513,38 +517,37 @@ python -m pytest tests/test_engine.py -q
 
 ### UI Screens Description
 
-**1. Assess Tab (Input Form)**
+**1. Assess View (Input Form)**
 - Grouped questions by category: Basic Info, Compensation, Work Conditions, Career Development, Legitimacy
-- Conditional fields: commute_time only shown for on-site/hybrid work modes
-- Mix of select boxes and number inputs with sensible defaults
-- Help text for every field
-- Submit button triggers inference engine and stores result in session state
+- Conditional fields: `commute_time` only requested for on-site/hybrid work modes; remote positions automatically skip commute
+- Input widgets with sensible defaults and explanatory tooltips
+- Submit button triggers forward chaining engine and navigates directly to the Results page
 
-**2. Result Tab (Assessment Display)**
-- Colored verdict banner: Red (High Risk), Orange (Needs Investigation), Blue (Suitable with Conditions), Green (Strongly Suitable), Gray (Insufficient Info)
-- 4 metric cards showing category scores out of 100
-- Horizontal bar chart visualizing scores
-- Positive factors section (green success boxes)
-- Risk factors section (red error boxes for Critical, orange warnings for High/Medium)
-- Numbered recommendations list
-- Questions to ask employer
-- Expandable "Why this result?" section showing all fired rules with details
-- JSON download button
-- Disclaimer about tool limitations
+**2. Results View (Assessment Display)**
+- Dynamic verdict card with color-coded border: High Risk (🚨 red), Needs Further Investigation (amber), Suitable with Conditions (✅ blue), Strongly Suitable (✅ green), Insufficient Information (grey)
+- 4 custom metric cards with inline progress indicators showing category scores (0-100)
+- Horizontal bar chart comparing scores across dimensions
+- Positive factors section highlighted with ✅
+- Risk factors section with 🚨 for critical severity issues
+- Actionable recommendations list prioritized by rule severity
+- Specific questions to ask employer based on missing documentation or potential risks
+- Expandable "Why This Result?" section showing all fired rules with firing order, matched facts, and rule explanations
+- JSON download button for saving full assessment reports
+- Heuristic tool disclaimer
 
-**3. What-If Tab (Scenario Analysis)**
-- Allows changing 3 key parameters: monthly pay, weekly hours, written contract
-- Re-runs inference engine with modified facts
-- Side-by-side comparison: Original vs What-If verdict
-- Lists rules that appeared (new) or disappeared (removed)
-- Helps users understand sensitivity to key factors
+**3. What-If View (Scenario Analysis)**
+- Allows modifying 3 key decision drivers: monthly pay, weekly hours, and written contract availability
+- Instant re-evaluation against the full rule base
+- Side-by-side comparison: Original vs What-If verdict cards
+- Category score delta table showing exact point differences
+- Detailed diff of newly triggered rules and no longer triggered rules
 
-**4. Knowledge Base Tab (Rule Explorer)**
-- Search box to filter rules by text
-- Category dropdown filter
-- Data table showing all rules: ID, Name, Category, Severity, Priority, Explanation
-- System thresholds expandable section showing all PKR amounts and numeric limits
-- Allows students to explore the 50 rules for viva preparation
+**4. Knowledge Base View (Rule Explorer)**
+- Live stat counters showing rule distribution across all 5 categories
+- Multi-dimensional search (rule name, explanation, or condition facts)
+- Category filter dropdown and severity filter chips
+- Interactive table displaying all 50 rules (ID, Name, Category, Severity, Priority, Conclusion, Explanation)
+- Expandable system thresholds section showing all centralized monetary and numeric limits
 
 ---
 
